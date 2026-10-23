@@ -1,121 +1,73 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import {
+  AppBar,
+  Box,
+  Container,
+  CssBaseline,
+  ThemeProvider,
+  Toolbar,
+  Typography,
+} from '@mui/material'
+import { tema } from './estilos/tema'
+import { recetas } from './datos/recetas'
+import { ModalReceta } from './componentes/ModalReceta'
+import { TarjetaReceta } from './componentes/TarjetaReceta'
+import { IconoPlatillo } from './componentes/Iconos'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [recetaSelec, setRecetaSelec] = useState(null)
+
+  const abrirReceta = (receta) => setRecetaSelec(receta)
+  const cerrarReceta = () => setRecetaSelec(null)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <ThemeProvider theme={tema}>
+      <CssBaseline />
+      <Box className="pagina">
+        <AppBar
+          component="header"
+          position="static"
+          elevation={0}
+          className="barraNavegacion"
         >
-          Count is {count}
-        </button>
-      </section>
+          <Toolbar className="contenedorBarra">
+            <Box className="marcaSitio">
+              <IconoPlatillo aria-hidden="true" />
+              <Typography component="p" className="tituloSitio">
+                PapuComida
+              </Typography>
+            </Box>
+            <a className="enlaceInicio" href="#inicio">Inicio</a>
+          </Toolbar>
+        </AppBar>
 
-      <div className="ticks"></div>
+        <main id="inicio">
+          <Container className="contenido" maxWidth="md">
+            <section className="encabezado" aria-labelledby="tituloPrincipal">
+              <Typography component="h1" id="tituloPrincipal" variant="h3">
+                Recetas fáciles para compartir
+              </Typography>
+              <Typography className="subtitulo" component="p">
+                Dos opciones caseras, ricas y directas al plato.
+              </Typography>
+            </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <section aria-label="Lista de recetas" className="listaRecetas">
+              {recetas.map((receta) => (
+                <TarjetaReceta
+                  key={receta.id}
+                  receta={receta}
+                  alAbrir={abrirReceta}
+                />
+              ))}
+            </section>
+          </Container>
+        </main>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <ModalReceta receta={recetaSelec} alCerrar={cerrarReceta} />
+      </Box>
+    </ThemeProvider>
   )
 }
 
