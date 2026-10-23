@@ -1,0 +1,45 @@
+export const recetas = [
+  {
+    id: 'molletes',
+    titulo: 'Molletes con carne',
+    descripcion: 'Pan dorado, frijoles, carne sazonada y queso fundido.',
+    imagen: '/imagenes/mollete.jpe',
+    altImagen: 'Molletes con carne',
+    tiempo: '25 min',
+    porciones: '2 porciones',
+    ingredientes: [
+      '2 bolillos partidos a la mitad',
+      '1 taza de frijoles refritos',
+      '200 g de carne molida cocida',
+      '1 taza de queso manchego rallado',
+      'Pico de gallo al gusto',
+    ],
+    pasos: [
+      'Tuesta las mitades de bolillo hasta que estén ligeramente doradas.',
+      'Unta los frijoles y agrega la carne cocida sobre cada mitad.',
+      'Cubre con queso y hornea hasta que se derrita.',
+      'Sirve con pico de gallo.',
+    ],
+  },
+  {
+    id: 'quesadillas',
+    titulo: 'Quesadillas',
+    descripcion: 'Tortillas calientes con queso derretido y un toque casero.',
+    imagen: '/imagenes/quesadilla.jpe',
+    altImagen: 'Quesadillas con queso',
+    tiempo: '15 min',
+    porciones: '4 porciones',
+    ingredientes: [
+      '4 tortillas de maíz o harina',
+      '200 g de queso Oaxaca deshebrado',
+      '1 cucharadita de aceite',
+      'Salsa al gusto',
+    ],
+    pasos: [
+      'Calienta un comal a fuego medio.',
+      'Coloca queso en una mitad de cada tortilla y dóblala.',
+      'Cocina por ambos lados hasta que el queso se derrita.',
+      'Sirve de inmediato con salsa.',
+    ],
+  },
+]
